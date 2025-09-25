@@ -1,11 +1,14 @@
 """Expose a client for making calls to GitHub's GraphQL API."""
 
 import logging
+import re
 from typing import Any
 
 import requests
 
 from config import get_db_settings
+from analytics.integrations.github.validation import ProjectItem
+from src.util.input_sanitizer import InputValidationError, sanitize_string, validate_json_safe_dict
 
 logger = logging.getLogger(__name__)
 
@@ -76,10 +79,51 @@ class GitHubGraphqlClient:
             The JSON response from the API.
 
         """
+        # Validate and sanitize query input
+        if not isinstance(query, str):
+            raise ValueError("Query must be a string")
+        
+        if len(query) > 100000:  # Reasonable limit for GraphQL queries
+            raise ValueError("Query exceeds maximum length")
+        
+        # Basic validation to prevent injection of dangerous patterns
+        if re.search(r'(?i)(union\s+select|script|javascript|vbscript)', query):
+            raise ValueError("Query contains potentially dangerous patterns")
+        
+        # Sanitize query string
+        try:
+            query = sanitize_string(query, max_length=100000, allow_html=False)
+        except InputValidationError as e:
+            raise ValueError(f"Query validation failed: {e}")
+        
+        # Validate variables structure
+        if not isinstance(variables, dict):
+            raise ValueError("Variables must be a dictionary")
+        
+        try:
+            validate_json_safe_dict(variables, max_depth=10, max_keys=100)
+        except InputValidationError as e:
+            raise ValueError(f"Variables validation failed: {e}")
+        
+        # Validate individual variable values
+        sanitized_variables = {}
+        for key, value in variables.items():
+            if isinstance(value, str):
+                if len(value) > 1000:  # Reasonable limit for variable values
+                    raise ValueError(f"Variable '{key}' exceeds maximum length")
+                try:
+                    sanitized_variables[key] = sanitize_string(value, max_length=1000, allow_html=False)
+                except InputValidationError as e:
+                    raise ValueError(f"Variable '{key}' validation failed: {e}")
+            elif isinstance(value, (int, float, bool)):
+                sanitized_variables[key] = value
+            else:
+                raise ValueError(f"Variable '{key}' has unsupported type: {type(value)}")
+        
         response = requests.post(
             self.endpoint,
             headers=self.headers,
-            json={"query": query, "variables": variables},
+            json={"query": query, "variables": sanitized_variables},
             timeout=60,
         )
         response.raise_for_status()
