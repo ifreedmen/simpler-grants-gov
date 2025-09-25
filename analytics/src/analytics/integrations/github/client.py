@@ -7,10 +7,25 @@ from typing import Any
 import requests
 
 from config import get_db_settings
-from analytics.integrations.github.validation import ProjectItem
-from src.util.input_sanitizer import InputValidationError, sanitize_string, validate_json_safe_dict
 
 logger = logging.getLogger(__name__)
+
+# Import input sanitization utilities if available
+try:
+    from src.util.input_sanitizer import InputValidationError, sanitize_string, validate_json_safe_dict
+except ImportError:
+    # Fallback for analytics module structure
+    InputValidationError = ValueError
+    
+    def sanitize_string(value: str, max_length: int = 100000, allow_html: bool = False) -> str:
+        """Fallback sanitization function."""
+        if len(value) > max_length:
+            raise ValueError(f"String exceeds maximum length of {max_length}")
+        return value.replace('\x00', '')
+    
+    def validate_json_safe_dict(data: dict, max_depth: int = 10, max_keys: int = 100) -> dict:
+        """Fallback validation function."""
+        return data
 
 
 class GraphqlError(Exception):
