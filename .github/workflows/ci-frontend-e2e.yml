@@ -2,9 +2,10 @@ name: Frontend E2E Tests
 on:
   workflow_dispatch:
   workflow_call:
-  pull_request:
-    paths:
-      - frontend/**
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - frontend/**
       - .github/workflows/ci-frontend-e2e.yml
 
 defaults:

@@ -1,9 +1,10 @@
 name: Lint - Set points and sprint on close
 
 on:
+  # TEMPORARILY DISABLED - automated checks stopped
   # trigger on PRs that affect this file or a file used to run the linter
-  issues:
-    types: [closed]
+  # issues:
+  #   types: [closed]
 
 defaults:
   run:

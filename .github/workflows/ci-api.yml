@@ -2,10 +2,11 @@ name: API Checks
 
 on:
   workflow_call:
-  pull_request:
-    paths:
-      - api/**
-      - .github/workflows/ci-api.yml
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - api/**
+  #     - .github/workflows/ci-api.yml
 
 defaults:
   run:

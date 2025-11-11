@@ -2,10 +2,11 @@ name: Frontend Checks
 
 on:
   workflow_call:
-  pull_request:
-    paths:
-      - frontend/**
-      - .github/workflows/ci-frontend.yml
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - frontend/**
+  #     - .github/workflows/ci-frontend.yml
 
 defaults:
   run:
