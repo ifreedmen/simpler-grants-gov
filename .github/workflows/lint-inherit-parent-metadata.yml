@@ -1,8 +1,9 @@
 name: Lint - Inherit parent metadata
 
 on:
-  issues:
-    types: [opened]
+  # TEMPORARILY DISABLED - automated checks stopped
+  # issues:
+  #   types: [opened]
 
 permissions:
   issues: write

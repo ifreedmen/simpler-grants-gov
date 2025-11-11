@@ -1,8 +1,9 @@
 name: Lint - Propagate milestone to sub-issues
 
 on:
-  issues:
-    types: [milestoned]
+  # TEMPORARILY DISABLED - automated checks stopped
+  # issues:
+  #   types: [milestoned]
   workflow_dispatch:
     inputs:
       issue_url:

@@ -1,10 +1,11 @@
 name: "Co-planning: Sync GitHub to Fider"
 
 on:
-  pull_request:
-    paths:
-      - ".github/linters/coplanning/**"
-      - ".github/workflows/coplanning-sync-gh-to-fider.yml"
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - ".github/linters/coplanning/**"
+  #     - ".github/workflows/coplanning-sync-gh-to-fider.yml"
   workflow_dispatch: # for manual runs
 
 permissions:

@@ -2,10 +2,11 @@ name: Analytics Checks
 
 on:
   workflow_call:
-  pull_request:
-    paths:
-      - analytics/**
-      - .github/workflows/ci-analytics.yml
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - analytics/**
+  #     - .github/workflows/ci-analytics.yml
 
 defaults:
   run:

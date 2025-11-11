@@ -1,10 +1,11 @@
 name: "Deliverable mapping: Repo level"
 
 on:
-  pull_request:
-    paths:
-      - ".github/linters/deps_mapping/**"
-      - ".github/workflows/deps-mapping-repo.yml"
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - ".github/linters/deps_mapping/**"
+  #     - ".github/workflows/deps-mapping-repo.yml"
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * 1" # run weekly at midnight on Monday

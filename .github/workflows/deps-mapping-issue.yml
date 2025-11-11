@@ -1,10 +1,11 @@
 name: "Deliverable mapping: Issue level"
 
 on:
-  pull_request:
-    paths:
-      - ".github/linters/deps_mapping/**"
-      - ".github/workflows/deps-mapping-issue.yml"
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - ".github/linters/deps_mapping/**"
+  #     - ".github/workflows/deps-mapping-issue.yml"
   workflow_dispatch: # for manual runs
   schedule:
     - cron: "0 0 * * 1" # run weekly at midnight on Monday

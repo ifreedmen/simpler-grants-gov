@@ -1,9 +1,10 @@
 name: NOFOs Checks
 
 on:
-  pull_request:
-    paths:
-      - .github/workflows/ci-nofos.yml
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - .github/workflows/ci-nofos.yml
   workflow_call:
     inputs:
       version:

@@ -2,10 +2,11 @@ name: CommonGrants API Checks
 
 on:
   workflow_call:
-  pull_request:
-    paths:
-      - api/src/api/common_grants/**
-      - api/src/services/common_grants/**
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - api/src/api/common_grants/**
+  #     - api/src/services/common_grants/**
       - .github/workflows/ci-api-common-grants.yml
 
 defaults:

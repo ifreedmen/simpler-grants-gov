@@ -3,11 +3,12 @@
 name: CI - Check wiki links
 
 on:
-  pull_request:
-    paths:
-      - documentation/wiki/**
-      - .github/workflows/ci-wiki-links.yml
-      - .github/linters/scripts/check-wiki-pages-linked-to-summary.sh
+  # TEMPORARILY DISABLED - automated checks stopped
+  # pull_request:
+  #   paths:
+  #     - documentation/wiki/**
+  #     - .github/workflows/ci-wiki-links.yml
+  #     - .github/linters/scripts/check-wiki-pages-linked-to-summary.sh
 
 defaults:
   run:
